@@ -1,10 +1,12 @@
-from datetime      import datetime, date, timedelta
+from datetime import datetime, date, timedelta
+from time     import sleep
+import traceback
 
 import yfinance  as yf
 import pandas    as pd
 import pandas_ta as ta
 import numpy as np
-import traceback
+
 
 def add_supertrend_indicator(data: pd.DataFrame, ticker:str, super_time_period=10, multiplier=3) -> pd.DataFrame:
     """
@@ -418,7 +420,7 @@ def validate_ticker(ticker:str)->bool:
     try:
         ticker_obj  = yf.Ticker(ticker)
         ticker_info = ticker_obj.get_info()
-        sleep(1) # not sure if gagging to not waiting, is this async call for get_info?
+        sleep(1)
         total_rev   = 'totalRevenue'
         if total_rev in ticker_info.keys() and ticker_info[total_rev] is not None:
             valid_ticker = True
