@@ -11,6 +11,7 @@ from yfinance_utils import (
     calculate_returns,
     detect_breakouts,
     fetch_data,
+    gen_ticker_timestamp_suffix_str,
     validate_ticker
 )
 
