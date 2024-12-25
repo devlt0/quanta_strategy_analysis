@@ -415,8 +415,12 @@ def add_all_new_indicators(data: pd.DataFrame, ticker) -> pd.DataFrame:
 
 def validate_ticker(ticker:str)->bool:
     valid_ticker = False
-    ticker_info  = yf.Ticker(ticker).info
-    tpr          = 'trailingPegRatio'
-    if tpr in ticker_info.keys() and ticker_info[tpr] is not None:
-        valid_ticker = True
+    try:
+        ticker_info  = yf.Ticker(ticker).get_info()
+        tpr          = 'trailingPegRatio'
+        if tpr in ticker_info.keys() and ticker_info[tpr] is not None:
+            valid_ticker = True
+    except Exception as e:
+        print(e)
+        # not sure why streamlit has issues with valid tickers here
     return valid_ticker
