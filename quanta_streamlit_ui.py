@@ -27,7 +27,8 @@ if 'date_state' not in st.session_state:
 
 
 
-ticker = st.text_input("Ticker Symbol (e.g., AAPL)", "AAPL").upper()
+ticker = st.text_input("Ticker Symbol (e.g., AAPL)", "AAPL")
+ticker = ticker.upper()
 # would be nice to have robust error handling on invalid symbol and dates
 col1, col2 = st.columns(2)
 
