@@ -416,9 +416,11 @@ def add_all_new_indicators(data: pd.DataFrame, ticker) -> pd.DataFrame:
 def validate_ticker(ticker:str)->bool:
     valid_ticker = False
     try:
-        ticker_info  = yf.Ticker(ticker).get_info()
-        tpr          = 'trailingPegRatio'
-        if tpr in ticker_info.keys() and ticker_info[tpr] is not None:
+        ticker_obj  = yf.Ticker(ticker)
+        ticker_info = ticker_obj.get_info()
+        sleep(1) # not sure if gagging to not waiting, is this async call for get_info?
+        total_rev   = 'totalRevenue'
+        if total_rev in ticker_info.keys() and ticker_info[total_rev] is not None:
             valid_ticker = True
     except Exception as e:
         print(e)
